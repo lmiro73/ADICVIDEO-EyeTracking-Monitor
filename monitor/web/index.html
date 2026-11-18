@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADICVIDEO – Real-Time Eye Tracking Monitor</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/dashboard.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="bar"><div class="brand"><span class="mark" aria-hidden="true">◉</span> ADICVIDEO</div>
+      <div class="source"><span id="mode">—</span><span id="status">Conectando con el monitor</span></div>
+    </div>
+  </header>
+  <main>
+    <div class="intro">
+      <div><h1>Real-Time Eye Tracking Monitor</h1><p id="origin">Tobii Pro Glasses 3</p></div>
+      <fieldset id="window"><legend>Ventana temporal</legend>
+        <label><input type="radio" name="window" value="10" checked><span>10 s</span></label>
+        <label><input type="radio" name="window" value="30"><span>30 s</span></label>
+        <label><input type="radio" name="window" value="60"><span>60 s</span></label>
+      </fieldset>
+    </div>
+    <div class="metrics">
+      <section class="card"><h2>Frecuencia observada</h2><strong id="rate">—</strong><p>Indicador derivado · Hz</p></section>
+      <section class="card"><h2>Mirada válida</h2><strong id="valid">—</strong><p id="denominator">Calidad de señal · % recibido</p></section>
+      <section class="card"><h2>Pupila izquierda / derecha</h2><strong id="pupils">—</strong><p>Señal medida · mm</p></section>
+      <section class="card"><h2>Mirada X / Y</h2><strong id="gaze">—</strong><p>Señal medida · coordenadas 2D normalizadas</p></section>
+    </div>
+    <div class="layout">
+      <div class="charts">
+        <section class="card">
+          <div class="panel-header"><h2>Diámetro pupilar</h2><div class="legend"><span class="mint">Izquierdo</span><span class="violet">Derecho</span></div></div>
+          <canvas id="pupil-chart" role="img" aria-label="Serie temporal de los diámetros pupilares en milímetros"></canvas>
+        </section>
+        <section class="card">
+          <div class="panel-header"><h2>Coordenadas de mirada</h2><div class="legend"><span class="mint">Eje X</span><span class="violet">Eje Y</span></div></div>
+          <canvas id="gaze-chart" role="img" aria-label="Serie temporal de las coordenadas normalizadas de mirada"></canvas>
+        </section>
+      </div>
+      <aside>
+        <section class="card">
+          <h2>Calidad de señal</h2>
+          <dl><div><dt>Muestras de mirada inválidas</dt><dd id="invalid">—</dd></div>
+            <div><dt>Discontinuidades</dt><dd id="gaps">—</dd></div>
+            <div><dt>Última discontinuidad</dt><dd id="last-gap">—</dd></div>
+            <div><dt>Reloj de la última muestra</dt><dd id="clock">—</dd></div></dl>
+          <p class="note">Ámbar indica muestras con mirada inválida. Coral indica una discontinuidad temporal. La causa de cada pérdida queda indeterminada.</p>
+        </section>
+        <section class="card">
+          <h2>Eventos experimentales</h2>
+          <form id="marker"><label class="sr-only" for="label">Etiqueta del evento</label>
+            <input id="label" maxlength="120" placeholder="Etiqueta del evento" required>
+            <button type="submit">Añadir</button>
+          </form>
+          <p id="marker-error" role="status" hidden></p>
+          <ul id="events"><li>Sin eventos en la ventana.</li></ul>
+        </section>
+      </aside>
+    </div>
+    <footer>Interpretación científica pendiente de validación. La pérdida de señal por sí sola no permite identificar parpadeos.</footer>
+  </main>
+</body>
+</html>

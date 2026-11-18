@@ -66,3 +66,9 @@ python procesar_datos.py
 streamlit run app.py
 
 ```
+## ADICVIDEO – Real-Time Eye Tracking Monitor
+
+La nueva aplicación se ejecuta con `python -m monitor`. Consulta la
+[instalación en Windows 11 y los modos de ejecución](docs/MONITOR.md),
+la [guía de la demostración de Lisboa](docs/LISBOA_2026.md) y la
+[auditoría científica](SCIENTIFIC_AUDIT.md).
